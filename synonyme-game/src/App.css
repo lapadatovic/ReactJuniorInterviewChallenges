@@ -1,1 +1,49 @@
+li {
+    list-style: none;
+}
+.app-container {
+    height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.form-container {
+    display: flex;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.word-input {
+    padding: 8px 0px;
+    margin-left: 10px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    background-color: #555;
+    border-bottom: 1px solid gray;
+}
+
+.word-input:focus {
+    outline: none;
+}
+
+.submit-button{
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 8px 10px ;
+    border-radius: 8px;
+    border: 1px solid white;
+    color:white;
+    background-color: #555;
+}
+
+.submit-button:hover {
+    border: 1px solid magenta;
+    color: magenta;
+}
