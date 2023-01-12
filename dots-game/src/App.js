@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [mousePosition, setMousePosition] = useState({});
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+    };
+    window.addEventListener('click', handleMouseMove);
+    return () => {
+      window.removeEventListener(
+        'click',
+        handleMouseMove
+      );
+    };
+  }, []);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="game-container">
+        <div>
+          The mouse is at position{' '}
+          <b>
+            ({mousePosition.x}, {mousePosition.y})
+          </b>
+        </div>
+      </div>
     </div>
+    
   );
 }
 
