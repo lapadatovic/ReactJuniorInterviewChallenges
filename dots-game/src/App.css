@@ -4,11 +4,14 @@
 
 .game-container {
   height: 100vh;
+  position: relative;
 }
 
 .dot {
+  position: absolute;
   height: 30px;
   width: 30px;
   border-radius: 50%;
   background-color: blueviolet;
+  transform: translate(-50%, -50%);
 }

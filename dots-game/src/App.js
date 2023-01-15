@@ -2,34 +2,32 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  const [mousePosition, setMousePosition] = useState({});
+  const [points, setPoints] = useState([]);
 
-  useEffect(() => {
+  useEffect(()=> {
     const handleMouseMove = (event) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
+      setPoints(oldPoints => [...oldPoints, {
+        x: event.clientX,
+        y: event.clientY
+      }])
     };
-    window.addEventListener('click', handleMouseMove);
-    return () => {
-      window.removeEventListener(
-        'click',
-        handleMouseMove
-      );
-    };
-  }, []);
+    window.addEventListener('click', handleMouseMove); 
+  },[])
+  
+  
 
-
+  
   return (
-    <div className="App">
-      <div className="game-container">
-        <div>
-          The mouse is at position{' '}
-          <b>
-            ({mousePosition.x}, {mousePosition.y})
-          </b>
-        </div>
+    <div className='game-container'>
+      <div className="dots">
+        {points.map((point,index) =>{
+          console.log(point.x, point.y)
+          return(
+            <div key={index} className='dot' style={{top:`${point.y}px`,left:`${point.x}px`}}></div>
+          )
+        })}
       </div>
     </div>
-    
   );
 }
 
