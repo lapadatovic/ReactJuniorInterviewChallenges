@@ -3,32 +3,43 @@ import './App.css';
 
 function App() {
   const [points, setPoints] = useState([]);
+  const [deletedPoints, setDeletedPoints] = useState([])
 
-  useEffect(()=> {
-    const handleMouseMove = (event) => {
-      setPoints(oldPoints => [...oldPoints, {
-        x: event.clientX,
-        y: event.clientY
-      }])
-    };
-    window.addEventListener('click', handleMouseMove); 
-  },[])
-  
-  
+  const handleMouseClick = (event) => {
+    setPoints([...points, {
+      x: event.clientX,
+      y: event.clientY
+    }])
+  };
 
-  
+  function handleUndo(){
+    let deletedPoints = [...points]
+    let lastDeleted = deletedPoints.pop();
+    setPoints(deletedPoints);
+    setDeletedPoints(oldDPs => [...oldDPs, {
+      lastDeleted
+    }])
+  } 
+
+  // function handleRedo(){
+  //   console.log('ck')
+  // } 
   return (
-    <div className='game-container'>
-      <div className="dots">
-        {points.map((point,index) =>{
-          console.log(point.x, point.y)
-          return(
-            <div key={index} className='dot' style={{top:`${point.y}px`,left:`${point.x}px`}}></div>
-          )
-        })}
+    <div className='app-container'>
+      <div className='game-container'>
+        <div className='buttons-area'>
+            <button className='btn' onClick={handleUndo}>Undo</button>
+            <button className='btn' onClick={handleRedo}>Redo</button>
+        </div>
+        <div className="dots" onClick={(e)=>handleMouseClick(e)}>
+          {points.map((point,index) =>{
+            return(
+              <div key={index} className='dot' style={{top:`${point.y}px`,left:`${point.x}px`}}></div>
+            )
+          })}
+        </div>
       </div>
     </div>
   );
 }
-
 export default App;
